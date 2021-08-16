@@ -411,6 +411,9 @@ public abstract class AbstractEnvironment implements ConfigurableEnvironment {
 			return Collections.emptyMap();
 		}
 		try {
+			/**
+			 * System.getenv()
+			 */
 			return (Map) System.getenv();
 		}
 		catch (AccessControlException ex) {
