@@ -122,6 +122,10 @@ public abstract class AbstractRefreshableConfigApplicationContext extends Abstra
 	 * @see org.springframework.core.env.Environment#resolveRequiredPlaceholders(String)
 	 */
 	protected String resolvePath(String path) {
+		/**
+		 * 这个path变量是从构造函数里传进来的
+		 * ApplicationContext ac = new ClassPathXmlApplicationContext("spring-beans.xml");
+		 */
 		return getEnvironment().resolveRequiredPlaceholders(path);
 	}
 
