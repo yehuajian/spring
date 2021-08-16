@@ -412,7 +412,7 @@ public abstract class AbstractEnvironment implements ConfigurableEnvironment {
 		}
 		try {
 			/**
-			 * System.getenv()
+			 * System.getenv()获取系统环境变量PATH的值
 			 */
 			return (Map) System.getenv();
 		}
