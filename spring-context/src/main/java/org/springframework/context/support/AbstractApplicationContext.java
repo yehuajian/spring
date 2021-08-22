@@ -517,40 +517,52 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	public void refresh() throws BeansException, IllegalStateException {
 		synchronized (this.startupShutdownMonitor) {
 			// Prepare this context for refreshing.
+			//1、准备刷新上下文环境
 			prepareRefresh();
 
 			// Tell the subclass to refresh the internal bean factory.
+			//2、获取子类初始化Bean工厂
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
 			// Prepare the bean factory for use in this context.
+			//3、对bean工厂进行填充属性
 			prepareBeanFactory(beanFactory);
 
 			try {
 				// Allows post-processing of the bean factory in context subclasses.
+				//4、让子类实现该接口
 				postProcessBeanFactory(beanFactory);
 
 				// Invoke factory processors registered as beans in the context.
+				//5、调用我们的bean工厂的后置处理器，1）将class扫描成bean定义 2）bean工厂的后置处理器调用
 				invokeBeanFactoryPostProcessors(beanFactory);
 
 				// Register bean processors that intercept bean creation.
+				//6、调用bean的后置处理器
 				registerBeanPostProcessors(beanFactory);
 
 				// Initialize message source for this context.
+				//7、初始化国际化资源处理器
 				initMessageSource();
 
 				// Initialize event multicaster for this context.
+				//8、创建事件多播器
 				initApplicationEventMulticaster();
 
 				// Initialize other special beans in specific context subclasses.
+				//9、这个方法同样也是留给子类实现的，springboot也是从这个方法进行启动tomcat的
 				onRefresh();
 
 				// Check for listener beans and register them.
+				//10、把事件监听器注册到多播器上
 				registerListeners();
 
 				// Instantiate all remaining (non-lazy-init) singletons.
+				//11、实例化我们剩余的单实例bean
 				finishBeanFactoryInitialization(beanFactory);
 
 				// Last step: publish corresponding event.
+				//12、最后容器刷新 发布刷新事件（Spring cloud也是从这里启动的）
 				finishRefresh();
 			}
 
@@ -597,6 +609,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 		// Validate that all properties marked as required are resolvable:
 		// see ConfigurablePropertyResolver#setRequiredProperties
+		//用来校验我们容器启动必须依赖的环境变量的值
 		getEnvironment().validateRequiredProperties();
 
 		// Store pre-refresh ApplicationListeners...
