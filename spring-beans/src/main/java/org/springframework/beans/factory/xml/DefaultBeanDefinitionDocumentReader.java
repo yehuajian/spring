@@ -145,7 +145,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 		}
 
 		preProcessXml(root);
-		parseBeanDefinitions(root, this.delegate);
+		parseBeanDefinitions(root, this.delegate);//解析bean定义
 		postProcessXml(root);
 
 		this.delegate = parent;
@@ -169,7 +169,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 			NodeList nl = root.getChildNodes();
 			for (int i = 0; i < nl.getLength(); i++) {
 				Node node = nl.item(i);
-				if (node instanceof Element) {
+				if (node instanceof Element) {//判断节点是元素
 					Element ele = (Element) node;
 					if (delegate.isDefaultNamespace(ele)) {
 						parseDefaultElement(ele, delegate);

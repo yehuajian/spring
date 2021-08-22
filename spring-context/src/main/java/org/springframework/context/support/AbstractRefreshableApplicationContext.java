@@ -125,9 +125,11 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 		}
 		try {
 			//为spring应用上下文对象创建beanFactory
+			//DefaultListableBeanFactory 实现7个接口的子类
 			DefaultListableBeanFactory beanFactory = createBeanFactory();
 			beanFactory.setSerializationId(getId());
 			customizeBeanFactory(beanFactory);
+			//加载bean定义
 			loadBeanDefinitions(beanFactory);
 			this.beanFactory = beanFactory;
 		}

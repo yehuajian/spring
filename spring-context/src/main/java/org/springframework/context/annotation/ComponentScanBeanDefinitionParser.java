@@ -81,7 +81,7 @@ public class ComponentScanBeanDefinitionParser implements BeanDefinitionParser {
 	@Nullable
 	public BeanDefinition parse(Element element, ParserContext parserContext) {
 		String basePackage = element.getAttribute(BASE_PACKAGE_ATTRIBUTE);
-		basePackage = parserContext.getReaderContext().getEnvironment().resolvePlaceholders(basePackage);
+		basePackage = parserContext.getReaderContext().getEnvironment().resolvePlaceholders(basePackage);//获取bean定义的包名
 		String[] basePackages = StringUtils.tokenizeToStringArray(basePackage,
 				ConfigurableApplicationContext.CONFIG_LOCATION_DELIMITERS);
 
